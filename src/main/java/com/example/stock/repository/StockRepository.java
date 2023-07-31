@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.LockModeType;
+import javax.persistence.Version;
 
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
@@ -14,5 +15,9 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select s from Stock s where s.id = :id")
     Stock findByIdWithPessimisticLock(Long id);
+
+    @Version
+    @Query("select s from Stock s where s.id = :id")
+    Stock findByIdWithOptimisticLock(Long id);
 
 }

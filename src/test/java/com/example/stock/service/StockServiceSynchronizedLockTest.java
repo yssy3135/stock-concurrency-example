@@ -15,10 +15,10 @@ import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class StockServiceTest {
+class StockServiceSynchronizedLockTest {
 
     @Autowired
-    private PessimisticLockStockService stockService;
+    private StockService stockService;
 
     @Autowired
     private StockRepository stockRepository;
