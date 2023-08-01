@@ -1,6 +1,7 @@
 package com.example.stock.config;
 
 import lombok.RequiredArgsConstructor;
+import org.redisson.Redisson;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
@@ -37,4 +38,7 @@ public class RedisRepositoryConfig {
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         return redisTemplate;
     }
+
+
+
 }
