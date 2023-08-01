@@ -10,14 +10,14 @@ import javax.persistence.LockModeType;
 import javax.persistence.Version;
 
 @Repository
-public interface StockRepository extends JpaRepository<Stock, Long> {
+public interface LockRepository extends JpaRepository<Stock, Long> {
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select s from Stock s where s.id = :id")
-    Stock findByIdWithPessimisticLock(Long id);
 
-    @Version
-    @Query("select s from Stock s where s.id = :id")
-    Stock findByIdWithOptimisticLock(Long id);
+    @Query(value = "select get_lock(:key, 3000)", nativeQuery = true)
+    void getLock(String key);
+
+    @Query(value = "select release_lock(:key)", nativeQuery = true)
+    void releaseLock(String key);
+
 
 }
